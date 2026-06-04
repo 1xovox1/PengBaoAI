@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
   workflow_dispatch:
 
 permissions:
@@ -29,12 +31,9 @@ jobs:
         env:
           GITHUB_PAGES: 'true'
 
-      - name: Deploy built site to main/docs
+      - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          publish_branch: main
-          destination_dir: docs
-          keep_files: true
-          commit_message: 'deploy: update GitHub Pages site'
+          force_orphan: true
