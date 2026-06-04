@@ -1,0 +1,1 @@
+import{a3 as r,a4 as a}from"./index-2HjG1aBr.js";const s=r.create({baseURL:"",timeout:15e4});s.interceptors.request.use(e=>{const t=a();return t&&(e.headers=e.headers||{},e.headers.Authorization=`Bearer ${t}`),e});export{s as h};
