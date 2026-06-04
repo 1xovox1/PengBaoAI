@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诊断工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .check-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #1428A0;
+        }
+        .success { border-left-color: #10B981; }
+        .error { border-left-color: #EF4444; }
+        .warning { border-left-color: #F59E0B; }
+        pre {
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        button {
+            background: #1428A0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1E40E6;
+        }
+    </style>
+</head>
+<body>
+    <h1>鹏宝AI - 问题诊断工具</h1>
+    
+    <div class="check-item">
+        <h3>1. 检查基础环境</h3>
+        <div id="env-check"></div>
+    </div>
+    
+    <div class="check-item">
+        <h3>2. 检查Vue应用</h3>
+        <div id="vue-check"></div>
+        <button onclick="checkVue()">检查Vue</button>
+    </div>
+    
+    <div class="check-item">
+        <h3>3. 检查路由</h3>
+        <div id="router-check"></div>
+        <button onclick="checkRouter()">检查路由</button>
+    </div>
+    
+    <div class="check-item">
+        <h3>4. 检查控制台错误</h3>
+        <p>请打开浏览器开发者工具（F12），查看Console标签页，然后：</p>
+        <ol>
+            <li>查看是否有红色错误信息</li>
+            <li>复制所有错误信息</li>
+            <li>查看Network标签页，看是否有文件加载失败（红色）</li>
+        </ol>
+    </div>
+    
+    <div class="check-item">
+        <h3>5. 快速测试</h3>
+        <p>访问以下地址测试：</p>
+        <ul>
+            <li><a href="http://localhost:3000" target="_blank">http://localhost:3000</a> - 主页</li>
+            <li><a href="http://localhost:3000/test" target="_blank">http://localhost:3000/test</a> - 测试页</li>
+            <li><a href="http://localhost:3000/chat" target="_blank">http://localhost:3000/chat</a> - 对话页</li>
+        </ul>
+    </div>
+    
+    <div class="check-item">
+        <h3>6. 生成诊断报告</h3>
+        <button onclick="generateReport()">生成报告</button>
+        <div id="report"></div>
+    </div>
+
+    <script>
+        // 检查基础环境
+        function checkEnv() {
+            const envDiv = document.getElementById('env-check');
+            let html = '<ul>';
+            
+            // 检查浏览器
+            html += `<li>浏览器: ${navigator.userAgent}</li>`;
+            
+            // 检查本地存储
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                html += `<li class="success">✓ LocalStorage 可用</li>`;
+            } catch(e) {
+                html += `<li class="error">✗ LocalStorage 不可用: ${e.message}</li>`;
+            }
+            
+            // 检查控制台
+            if (window.console && window.console.log) {
+                html += `<li class="success">✓ 控制台可用</li>`;
+            } else {
+                html += `<li class="error">✗ 控制台不可用</li>`;
+            }
+            
+            html += '</ul>';
+            envDiv.innerHTML = html;
+        }
+        
+        // 检查Vue
+        function checkVue() {
+            const vueDiv = document.getElementById('vue-check');
+            vueDiv.innerHTML = '<p>正在检查...</p>';
+            
+            fetch('/src/main.js')
+                .then(response => {
+                    if (response.ok) {
+                        vueDiv.innerHTML = '<p class="success">✓ main.js 文件可访问</p>';
+                    } else {
+                        vueDiv.innerHTML = `<p class="error">✗ main.js 文件不可访问 (状态码: ${response.status})</p>`;
+                    }
+                })
+                .catch(error => {
+                    vueDiv.innerHTML = `<p class="error">✗ 无法访问 main.js: ${error.message}</p>`;
+                });
+        }
+        
+        // 检查路由
+        function checkRouter() {
+            const routerDiv = document.getElementById('router-check');
+            routerDiv.innerHTML = '<p>当前路径: ' + window.location.pathname + '</p>';
+            routerDiv.innerHTML += '<p>完整URL: ' + window.location.href + '</p>';
+        }
+        
+        // 生成诊断报告
+        function generateReport() {
+            const reportDiv = document.getElementById('report');
+            let report = '<h4>诊断报告</h4><pre>';
+            
+            report += '=== 浏览器信息 ===\n';
+            report += 'User Agent: ' + navigator.userAgent + '\n';
+            report += '语言: ' + navigator.language + '\n';
+            report += '平台: ' + navigator.platform + '\n\n';
+            
+            report += '=== 当前页面信息 ===\n';
+            report += 'URL: ' + window.location.href + '\n';
+            report += '路径: ' + window.location.pathname + '\n';
+            report += '协议: ' + window.location.protocol + '\n\n';
+            
+            report += '=== DOM检查 ===\n';
+            const appElement = document.getElementById('app');
+            if (appElement) {
+                report += '✓ 找到 #app 元素\n';
+                report += '内容: ' + appElement.innerHTML.substring(0, 200) + '\n';
+            } else {
+                report += '✗ 未找到 #app 元素\n';
+            }
+            
+            report += '\n=== 请复制以上信息并提供给开发者 ===\n';
+            report += '同时请提供浏览器控制台（F12 -> Console）中的错误信息\n';
+            
+            report += '</pre>';
+            reportDiv.innerHTML = report;
+        }
+        
+        // 页面加载时自动检查
+        window.onload = function() {
+            checkEnv();
+            checkRouter();
+        };
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,20 @@
+{
+  "name": "pengbao-ai-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "鹏宝AI 后端代理 - 转发各模型API，保护密钥",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "@anthropic-ai/sdk": "^0.32.1",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.3.2",
+    "xlsx": "^0.18.5"
+  }
+}

@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>2026 电商 AI 中台与业务闭环规划（战略版）</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --card: #ffffff;
+        --text: #111827;   /* gray-900 */
+        --muted: #4b5563;  /* gray-600 */
+        --accent: #2563eb; /* blue-600 */
+        --accent2: #0f766e; /* teal-700 */
+        --danger: #b91c1c; /* red-700 */
+        --border: rgba(17, 24, 39, 0.12);
+        --shadow: 0 1px 2px rgba(17, 24, 39, 0.06), 0 8px 24px rgba(17, 24, 39, 0.08);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", system-ui, -apple-system,
+          Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+      header {
+        padding: 28px 24px 18px;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: rgba(255, 255, 255, 0.9);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: 0.2px;
+      }
+      header p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      main {
+        padding: 18px 24px 60px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .note {
+        margin: 14px 0 22px;
+        padding: 12px 14px;
+        border: 1px solid rgba(37, 99, 235, 0.22);
+        background: rgba(37, 99, 235, 0.04);
+        color: var(--muted);
+        border-radius: 12px;
+        font-size: 13px;
+        line-height: 1.65;
+      }
+      .deck {
+        display: grid;
+        gap: 14px;
+      }
+      section.slide {
+        border: 1px solid var(--border);
+        background: var(--card);
+        border-radius: 16px;
+        padding: 18px 18px 16px;
+        box-shadow: var(--shadow);
+      }
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: baseline;
+        margin-bottom: 10px;
+      }
+      .meta .tag {
+        font-size: 12px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 118, 110, 0.25);
+        color: rgba(15, 118, 110, 0.95);
+        background: rgba(15, 118, 110, 0.06);
+        white-space: nowrap;
+      }
+      h2 {
+        margin: 0;
+        font-size: 18px;
+      }
+      h3 {
+        margin: 12px 0 8px;
+        font-size: 14px;
+        color: rgba(17, 24, 39, 0.95);
+      }
+      ul {
+        margin: 8px 0 0 18px;
+        padding: 0;
+        color: var(--text);
+        line-height: 1.75;
+      }
+      ul li { margin: 4px 0; }
+      .muted { color: var(--muted); }
+      .kpi {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .kpi .box {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 10px 10px 9px;
+        background: rgba(17, 24, 39, 0.02);
+      }
+      .kpi .box b { color: var(--accent2); }
+      .speaker {
+        margin-top: 12px;
+        padding: 10px 12px;
+        border-left: 3px solid rgba(37, 99, 235, 0.7);
+        background: rgba(37, 99, 235, 0.04);
+        border-radius: 12px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+          "Courier New", monospace;
+        color: rgba(15, 118, 110, 0.95);
+      }
+      @media (max-width: 900px) {
+        .kpi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>2026 电商 AI 中台与业务闭环规划（战略版）</h1>
+      <p>
+        适用：下周战略汇报。每个 <code>&lt;section class="slide"&gt;</code> 对应一页 PPT。<br />
+        你只需要把“姓名/部门/日期”和少量业务数据（如目前使用频次、典型案例）补齐即可。
+      </p>
+    </header>
+    <main>
+      <div class="note">
+        <b>北极星一句话：</b>2026 年用一个 AI 工作台做统一入口，用两条业务闭环（直播、投放）做示范，沉淀周报/复盘标准工作流，把 AI 从零散工具变成可复制的经营能力。<br />
+        <b class="muted">提示：</b>老板要“战略规划”，所以这版少讲“做了多少 Agent”，多讲“平台化/闭环化/机制化/可衡量”。
+      </div>
+
+      <div class="deck">
+        <!-- Slide 01 -->
+        <section class="slide" data-slide="01" data-layout="title">
+          <div class="meta">
+            <h2>2026 电商 AI 中台与业务闭环规划</h2>
+            <span class="tag">战略版</span>
+          </div>
+          <ul>
+            <li><b>汇报人：</b>（填：你的姓名 / 岗位）</li>
+            <li><b>部门：</b>（填：电商部门）</li>
+            <li><b>日期：</b>（填：YYYY.MM）</li>
+          </ul>
+          <div class="speaker">
+            讲法：我今年不再只做“零散 Agent”，而是做“平台 + 两条闭环示范线 + 可复制工作流”，让 AI 变成组织能力。
+          </div>
+        </section>
+
+        <!-- Slide 02 -->
+        <section class="slide" data-slide="02">
+          <div class="meta">
+            <h2>为什么现在必须做（问题定义）</h2>
+            <span class="tag">背景</span>
+          </div>
+          <ul>
+            <li><b>现状：</b>多个 Agent 分散在不同入口（链接/群/平台），依赖人工分发与推动。</li>
+            <li><b>痛点：</b>难复制、难治理、难量化，业务侧反馈“缺闭环”。</li>
+            <li><b>结论：</b>需要把 AI 从“工具集合”升级为：<b>平台化</b> + <b>闭环化</b> + <b>运营化</b>。</li>
+          </ul>
+          <div class="speaker">
+            讲法：我不是否认过去的产出，而是要把它们收口成体系，形成“可复制、可衡量、可治理”的能力。
+          </div>
+        </section>
+
+        <!-- Slide 03 -->
+        <section class="slide" data-slide="03">
+          <div class="meta">
+            <h2>2026 北极星目标（North Star）</h2>
+            <span class="tag">目标</span>
+          </div>
+          <ul>
+            <li><b>统一入口：</b>模型 + Agent 在一个工作台里统一访问、统一权限与审计。</li>
+            <li><b>两条闭环示范：</b>直播话术闭环、投放闭环，形成可复制方法论。</li>
+            <li><b>标准工作流：</b>周报/复盘模板统一，action 必须回填，形成组织习惯。</li>
+            <li><b>可衡量：</b>以采纳率/执行率/节省时间为核心指标，逐步扩展到业务指标。</li>
+          </ul>
+        </section>
+
+        <!-- Slide 04 -->
+        <section class="slide" data-slide="04">
+          <div class="meta">
+            <h2>总体蓝图：平台层 × 业务层 × 组织层</h2>
+            <span class="tag">蓝图</span>
+          </div>
+          <ul>
+            <li><b>平台层（AI 工作台）：</b>统一入口 + 权限治理 + 数据/工具承载 + Agent 分发。</li>
+            <li><b>业务层（闭环线路）：</b>直播闭环、投放闭环先打通，其他场景逐步迁移。</li>
+            <li><b>组织层（机制与运营）：</b>周报/复盘工作流 + 试点复制机制 + 指标与案例库。</li>
+          </ul>
+          <div class="speaker">
+            讲法：今年不追求“全线系统打通”，先用半自动跑通闭环，再逐步工程化。
+          </div>
+        </section>
+
+        <!-- Slide 05 -->
+        <section class="slide" data-slide="05">
+          <div class="meta">
+            <h2>AI 工作台：定位与边界</h2>
+            <span class="tag">工作台</span>
+          </div>
+          <ul>
+            <li><b>定位：</b>统一入口 + 权限/审计 + 工具/数据承载 + Agent 组合交付。</li>
+            <li><b>边界：</b>前期不做“大一统数据中台”，先支持“导入/导出 + 模板化”。</li>
+            <li><b>目标：</b>从“找人要链接”变为“业务自助使用”，并可沉淀数据与案例。</li>
+          </ul>
+        </section>
+
+        <!-- Slide 06 -->
+        <section class="slide" data-slide="06">
+          <div class="meta">
+            <h2>AI 工作台包含什么（模块清单）</h2>
+            <span class="tag">工作台</span>
+          </div>
+          <ul>
+            <li><b>模型层：</b>国内/海外模型池（按成本/能力/合规分层）。</li>
+            <li><b>Agent 层：</b>场景卡片（直播、投放、周报、内容、客服…）。</li>
+            <li><b>数据/文件层：</b>上传下载、模板库、口径库、资料库（权限控制）。</li>
+            <li><b>工具层：</b>Excel 清洗、翻译、汇总、规则检查、必要的脚本能力。</li>
+            <li><b>治理层：</b>角色权限、日志审计、使用统计、可追溯产出。</li>
+            <li><b>运营层：</b>案例库、上新机制、培训入口、FAQ。</li>
+          </ul>
+        </section>
+
+        <!-- Slide 07 -->
+        <section class="slide" data-slide="07">
+          <div class="meta">
+            <h2>工作台最终效果（用户视角）</h2>
+            <span class="tag">工作台</span>
+          </div>
+          <ul>
+            <li>运营/投放/整合/直播：进入同一入口 → 选择场景卡片。</li>
+            <li>上传文件/选择时间范围 → 一键生成：结论 + action + 可下载附件。</li>
+            <li>复盘回填：下次生成自动参考上次 action 结果（闭环可持续）。</li>
+          </ul>
+          <div class="kpi">
+            <div class="box"><b>统一入口</b><div class="muted">减少沟通成本</div></div>
+            <div class="box"><b>权限审计</b><div class="muted">可控可追溯</div></div>
+            <div class="box"><b>模板沉淀</b><div class="muted">可复制推广</div></div>
+            <div class="box"><b>指标体系</b><div class="muted">可量化证明</div></div>
+          </div>
+        </section>
+
+        <!-- Slide 08 -->
+        <section class="slide" data-slide="08">
+          <div class="meta">
+            <h2>闭环示范线 1：直播话术闭环（闭环定义）</h2>
+            <span class="tag">闭环-直播</span>
+          </div>
+          <ul>
+            <li><b>闭环链路：</b>播前生成 → 上线使用 → 多因素复盘 → 动作建议 → 反哺下一场生成。</li>
+            <li><b>复盘四因素（对齐运营口径）：</b>政策价格 / 流量 / 数据 / 主播状态与话术。</li>
+            <li><b>关键点：</b>复盘不只“分析”，必须输出“下次怎么改”的可执行建议。</li>
+          </ul>
+        </section>
+
+        <!-- Slide 09 -->
+        <section class="slide" data-slide="09">
+          <div class="meta">
+            <h2>直播闭环：产出与衡量指标（先管理指标，后业务指标）</h2>
+            <span class="tag">闭环-直播</span>
+          </div>
+          <h3>标准产出</h3>
+          <ul>
+            <li>结论：本场表现的关键驱动因素与主要问题。</li>
+            <li>话术改动：保留/删减/改写的模块建议（可直接套用）。</li>
+            <li>动作清单：下一场策略动作（福利节奏、商品排序、异议处理）。</li>
+          </ul>
+          <h3>衡量指标（建议先选 2 个）</h3>
+          <ul>
+            <li>话术采纳率（运营实际采用的比例）。</li>
+            <li>复盘建议采纳率（action 被执行的比例）。</li>
+            <li class="muted">后续再逐步关联业务指标：转化/停留/客单等（根据团队口径选择）。</li>
+          </ul>
+        </section>
+
+        <!-- Slide 10 -->
+        <section class="slide" data-slide="10">
+          <div class="meta">
+            <h2>闭环示范线 2：投放闭环（闭环定义）</h2>
+            <span class="tag">闭环-投放</span>
+          </div>
+          <ul>
+            <li><b>闭环链路：</b>数据汇聚与清洗 → 诊断归因 → 动作清单 → 复盘回填 → 规则迭代。</li>
+            <li><b>战略定位：</b>把“数据清洗”定义为闭环入口能力，而不是开发排期问题。</li>
+            <li><b>输出形态：</b>日报（insight/issue/action）+ 明日动作清单 + 风险清单。</li>
+          </ul>
+        </section>
+
+        <!-- Slide 11 -->
+        <section class="slide" data-slide="11">
+          <div class="meta">
+            <h2>投放闭环：衡量指标（可快速证明价值）</h2>
+            <span class="tag">闭环-投放</span>
+          </div>
+          <ul>
+            <li><b>产出效率：</b>日报/周报产出时间下降（例如 120min → 10min）。</li>
+            <li><b>异常提前量：</b>异常更早被发现（从“复盘后发现”变为“当日发现”）。</li>
+            <li><b>动作执行率：</b>建议 action 被执行的比例（闭环是否真的跑起来）。</li>
+            <li class="muted">后续再关联业务指标：成本、ROI、转化（需与团队口径对齐）。</li>
+          </ul>
+        </section>
+
+        <!-- Slide 12 -->
+        <section class="slide" data-slide="12">
+          <div class="meta">
+            <h2>组织层：周报/复盘成为统一语言（标准工作流）</h2>
+            <span class="tag">机制</span>
+          </div>
+          <ul>
+            <li><b>统一模板：</b>核心数据 + insight / issue / action + 下周计划 + 风险。</li>
+            <li><b>强制回填：</b>下周必须回填“上周 action 完成情况与效果”，否则不构成闭环。</li>
+            <li><b>可复制：</b>直播、投放、整合分析等都用同一模板语言，减少沟通成本。</li>
+          </ul>
+        </section>
+
+        <!-- Slide 13 -->
+        <section class="slide" data-slide="13">
+          <div class="meta">
+            <h2>推进机制：试点 → 标准化 → 复制（一个人也能跑）</h2>
+            <span class="tag">机制</span>
+          </div>
+          <ul>
+            <li><b>试点：</b>每条闭环只抓 1 个业务 owner（愿意配合的早期采用者）。</li>
+            <li><b>节奏：</b>48h demo → 1 周 MVP → 2–3 周标准化 → 复制到其他组。</li>
+            <li><b>运营动作：</b>每月一次能力上新 + 30 分钟培训 + 案例发布。</li>
+            <li><b>治理：</b>工作台统计使用与采纳，沉淀案例库，持续迭代。</li>
+          </ul>
+        </section>
+
+        <!-- Slide 14 -->
+        <section class="slide" data-slide="14">
+          <div class="meta">
+            <h2>2026 里程碑路线图（Q1–Q4）</h2>
+            <span class="tag">路线图</span>
+          </div>
+          <h3>Q1：打地基</h3>
+          <ul>
+            <li>工作台 MVP（统一入口、Agent 管理、文件/模板、基础统计）。</li>
+            <li>投放闭环跑通（数据清洗 → 日报 → 动作清单 → 回填）。</li>
+            <li>直播复盘升级为四因素输入输出标准。</li>
+          </ul>
+          <h3>Q2：打通直播闭环 + 推广周报</h3>
+          <ul>
+            <li>直播闭环跑通（复盘建议反哺下一场播前生成）。</li>
+            <li>周报体系推广到 2–3 个组，形成固定习惯。</li>
+          </ul>
+          <h3>Q3–Q4：规模化与沉淀</h3>
+          <ul>
+            <li>投放规则化异常诊断，工作台治理增强（权限/审计/指标）。</li>
+            <li>能力库与模板库固化，形成中台化资产与案例库。</li>
+          </ul>
+        </section>
+
+        <!-- Slide 15 -->
+        <section class="slide" data-slide="15">
+          <div class="meta">
+            <h2>资源诉求（最小支持，用于达成战略目标）</h2>
+            <span class="tag">资源</span>
+          </div>
+          <ul>
+            <li><b>业务侧：</b>直播/投放各 1 位试点负责人 + 固定数据提供节奏。</li>
+            <li><b>管理侧：</b>推动 action 回填机制落地（闭环关键）。</li>
+            <li><b>技术侧：</b>提供 1 个数据导出/接口协作窗口（没有也能半自动，有则更快规模化）。</li>
+          </ul>
+          <div class="speaker">
+            讲法：我需要的不是“大项目资源”，而是“试点负责人 + 数据节奏 + 回填机制”的最小支持，先把闭环跑起来再规模化。
+          </div>
+        </section>
+
+        <!-- Slide 16 -->
+        <section class="slide" data-slide="16">
+          <div class="meta">
+            <h2>2026 年底：交付什么“看得见的成果”</h2>
+            <span class="tag">总结</span>
+          </div>
+          <ul>
+            <li><b>1 个工作台：</b>统一入口、权限审计、能力承载、可运营。</li>
+            <li><b>2 条闭环：</b>直播话术闭环、投放闭环可复制。</li>
+            <li><b>1 套工作流：</b>周报/复盘模板 + action 回填机制。</li>
+            <li><b>1 套指标与案例库：</b>用数据证明价值，持续迭代与扩展。</li>
+          </ul>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
+
