@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:pages": "vite build && node scripts/copy-404.js",
+    "build:pages": "vite build && node scripts/copy-404.js && node scripts/sync-github-pages.js",
     "preview": "vite preview"
   },
   "dependencies": {

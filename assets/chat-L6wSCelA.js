@@ -1,0 +1,1 @@
+import{h as c}from"./http-BcSfiTa-.js";async function r(n,o,s=2e3,t=null){const a={model:n,messages:o,max_tokens:s};t&&(a.conversation_id=t);const{data:i}=await c.post("/api/chat",a);return i}export{r as s};

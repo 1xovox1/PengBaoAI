@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -8,7 +8,16 @@
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module">
+      if (location.hostname.endsWith('github.io')) {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = '/PengBaoAI/assets/index-CqsFR_uh.css'
+        document.head.appendChild(link)
+        await import('/PengBaoAI/assets/index-BHi8505F.js')
+      } else {
+        await import('/src/main.js')
+      }
+    </script>
   </body>
 </html>
-
