@@ -1,5 +1,7 @@
 # 鹏宝AI - 智能对话平台
 
+在线演示：**https://1xovox1.github.io/PengBaoAI/**
+
 一个集成了多个AI模型和Agent智能体的企业级智能对话平台，专为运营人员设计。
 
 ## 功能特性

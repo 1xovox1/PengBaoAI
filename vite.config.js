@@ -3,6 +3,8 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
 export default defineConfig({
+  // GitHub Pages 项目站路径：https://1xovox1.github.io/PengBaoAI/
+  base: process.env.GITHUB_PAGES === 'true' ? '/PengBaoAI/' : '/',
   plugins: [vue()],
   resolve: {
     alias: {
